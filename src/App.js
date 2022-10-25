@@ -1,17 +1,17 @@
 import React from 'react';
-// import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { decreaseCount, increaseCount } from './redux/actions/actionCreator';
 
 const App = () => {
-  // const store = useSelector((state) => state);
-  // console.log(store);
-
-  const [count, setCount] = React.useState(0);
+  const dispatch = useDispatch();
+  const count = useSelector(store => store?.counter?.count);
+  console.log(count);
 
   const handleIncrease = () => {
-    setCount(count + 1);
+    dispatch(increaseCount());
   };
   const handleDecrease = () => {
-    setCount(count - 1);
+    dispatch(decreaseCount());
   };
 
   return (

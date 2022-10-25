@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+// import { useSelector } from 'react-redux';
 
-function App() {
+const App = () => {
+  // const store = useSelector((state) => state);
+  // console.log(store);
+
+  const [count, setCount] = React.useState(0);
+
+  const handleIncrease = () => {
+    setCount(count + 1);
+  };
+  const handleDecrease = () => {
+    setCount(count - 1);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={handleIncrease}>Increase</button>
+      <button onClick={handleDecrease}>Decrease</button>
+      <h1>{count}</h1>
     </div>
   );
-}
+};
 
 export default App;

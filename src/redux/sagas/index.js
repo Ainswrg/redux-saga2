@@ -1,21 +1,15 @@
-import { takeEvery, takeLatest, takeLeading, select } from "redux-saga/effects";
-import { INCREASE_COUNT, DECREASE_COUNT } from "../constants";
-import counter from "../reducers/counter";
+import { takeEvery, put, call } from "redux-saga/effects";
+import { GET_LATEST_NEWS } from "../constants";
+import { getLatestNews } from "../../api";
+import { setLatestNews } from "../actions/actionCreator";
 
-const delay = (time) => new Promise((resolve, reject) => {
-  setTimeout(resolve, time * 1000);
-})
-
-export function* workerSaga() {
-  const count = yield select(({ counter }) => counter.count);
-  yield delay(3);
-  console.log(`watchClickSaga plus ${count}`);
-  yield;
+export function* handleLatestNews() {
+  const { hits } = yield call(getLatestNews, 'react');
+  yield put(setLatestNews(hits));
 }
 
 export function* watchClickSaga() {
-  yield takeLatest(INCREASE_COUNT, workerSaga);
-  yield takeLeading(INCREASE_COUNT, workerSaga);
+  yield takeEvery(GET_LATEST_NEWS, handleLatestNews);
 }
 
 export default function* rootSaga() {

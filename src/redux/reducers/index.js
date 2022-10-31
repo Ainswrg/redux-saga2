@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
-// import counter from './counter';
+import errors from './errors';
 import news from './news';
 
 
 const reducer = combineReducers({
-  // counter,
-  news
+  news,
+  errors
 });
 
 export default reducer;
